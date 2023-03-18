@@ -62,11 +62,48 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 250px; /* Adjust this value according to your needs */
-  height: auto; /* Keep this value as 'auto' to maintain the aspect ratio */
+  transform: translate(-50%, -50%) rotateY(0deg);
+  width: 250px;
+  height: auto;
+  z-index: 1;
+  backface-visibility: hidden;
 }
 
+#toggleImg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateY(180deg);
+  width: 250px;
+  height: auto;
+  backface-visibility: hidden;
+  transition: transform 0.5s;
+}
+
+#toggleImg.show {
+  opacity: 1; /* Set opacity to 1 to show the image */
+  transform: translate(-50%, -50%) rotateY(0deg); /* Rotate the image around Y-axis by 180 degrees */
+}
+
+
+
+
+    .flip {
+      animation: flip 0.5s;
+      transform-style: preserve-3d;
+    }
+
+    @keyframes flip {
+      0% {
+        transform: rotateY(0);
+      }
+      50% {
+        transform: rotateY(180deg);
+      }
+      100% {
+        transform: rotateY(360deg);
+      }
+    }
 
       @keyframes pulse {
         0%,
@@ -82,7 +119,13 @@
   <body>
     <div id="wrapper"></div>
 
-    <img src="https://i.imgur.com/lJV3V0m.png" alt="Topdown Logo" class="logo" />
+    <img id="logo" src="https://i.imgur.com/lJV3V0m.png" alt="Topdown Logo" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotateY(0deg); width: 250px; height: auto; z-index: 1;" class="logo" onclick="toggleImage()" />
+
+
+
+    <img id="toggleImg" src="https://i.imgur.com/1183oCx.png" alt="toggle image" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotateY(180deg); width: 250px; height: auto; opacity: 0; transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;" class="flip show" />
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
@@ -94,113 +137,187 @@
         mouse;
 
       function init() {
-        scene = new THREE.Scene();
-        camera = new THREE.PerspectiveCamera(
-          75,
-          window.innerWidth / window.innerHeight,
-          0.1,
-          1000
-        );
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+  );
 
-        renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+  renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
 
-        const geometry = new THREE.SphereGeometry(1, 32, 32);
-        const material = new THREE.MeshPhongMaterial({
-          color: 0x999999,
-          shininess: 100,
-        });
+  const geometry = new THREE.SphereGeometry(1, 32, 32);
+  const material = new THREE.MeshPhongMaterial({
+    color: 0x999999,
+    shininess: 100,
+  });
 
-        const sphere1 = new THREE.Mesh(geometry, material);
-    sphere1.position.set(-1, 0, 0);
-    sphere1.velocity = new THREE.Vector3(
-      (Math.random() - 0.5) * 0.0005,
-      (Math.random() - 0.5) * 0.0005,
-      (Math.random() - 0.5) * 0.0005
-    );
-    spheres.push(sphere1);
-    scene.add(sphere1);
+  const sphere1 = new THREE.Mesh(geometry, material);
+  sphere1.position.set(-1, 0, 0);
+  sphere1.velocity = new THREE.Vector3(
+    (Math.random() - 0.5) * 0.0005,
+    (Math.random() - 0.5) * 0.0005,
+    (Math.random() - 0.5) * 0.0005
+  );
+  spheres.push(sphere1);
+  scene.add(sphere1);
 
-    const sphere2 = new THREE.Mesh(geometry, material);
-    sphere2.position.set(1, 0, 0);
-    sphere2.velocity = new THREE.Vector3(
-      (Math.random() - 0.5) * 0.0005,
-      (Math.random() - 0.5) * 0.0005,
-      (Math.random() - 0.5) * 0.0005
-    );
-    spheres.push(sphere2);
-    scene.add(sphere2);
+  const sphere2 = new THREE.Mesh(geometry, material);
+  sphere2.position.set(1, 0, 0);
+  sphere2.velocity = new THREE.Vector3(
+    (Math.random() - 0.5) * 0.0005,
+    (Math.random() - 0.5) * 0.0005,
+    (Math.random() - 0.5) * 0.0005
+  );
+  spheres.push(sphere2);
+  scene.add(sphere2);
 
-    const sphere3 = new THREE.Mesh(geometry, material);
-    sphere3.position.set(0, 0, 0);
-    sphere3.velocity = new THREE.Vector3(
-      (Math.random() - 0.5) * 0.0005,
-      (Math.random() - 0.5) * 0.0005,
-      (Math.random() - 0.5) * 0.0005
-    );
-    spheres.push(sphere3);
-    scene.add(sphere3);
+  const sphere3 = new THREE.Mesh(geometry, material);
+  sphere3.position.set(0, 0, 0);
+  sphere3.velocity = new THREE.Vector3(
+    (Math.random() - 0.5) * 0.0005,
+    (Math.random() - 0.5) * 0.0005,
+    (Math.random() - 0.5) * 0.0005
+  );
+  spheres.push(sphere3);
+  scene.add(sphere3);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+  scene.add(ambientLight);
 
-    const pointLight = new THREE.PointLight(0xffffff, 1);
-    pointLight.position.set(10, 10, 10);
-    scene.add(pointLight);
+  const pointLight = new THREE.PointLight(0xffffff, 1);
+  pointLight.position.set(10, 10, 10);
+  scene.add(pointLight);
 
-    camera.position.z = 5;
+  camera.position.z = 5;
 
-    raycaster = new THREE.Raycaster();
-    mouse = new THREE.Vector2();
+  raycaster = new THREE.Raycaster();
+  mouse = new THREE.Vector2();
 
-    window.addEventListener("click", onClick, false);
+  window.addEventListener("click", onClick, false);
+  const toggleImg = document.getElementById("toggleImg");
+  const topdownLogo = document.querySelector(".logo");
+  topdownLogo.addEventListener("click", toggleImage);
+
+  toggleImg.addEventListener("click", function () {
+    toggleImg.classList.add("flip");
+    setTimeout(() => {
+      toggleImg.classList.remove("flip");
+      toggleImg.classList.toggle("show");
+      const topdownLogo = document.querySelector(".logo");
+      topdownLogo.style.display =
+        topdownLogo.style.display === "none" ? "block" : "none";
+    }, 500);
+  });
+
+  toggleImg.addEventListener("animationend", function () {
+    toggleImg.classList.remove("flip");
+  });
+
+
   }
+function toggleImage() {
+  const toggleImg = document.getElementById("toggleImg");
+  const topdownLogo = document.querySelector(".logo");
+  const showClass = "show";
+  const flipClass = "flip";
+
+  // check if toggleImg is currently displayed
+  if (toggleImg.classList.contains(showClass)) {
+    // hide toggleImg
+    toggleImg.classList.remove(showClass);
+
+    // flip toggleImg
+    toggleImg.classList.add(flipClass);
+    setTimeout(() => {
+      toggleImg.classList.remove(flipClass);
+
+      // show topdownLogo
+      topdownLogo.style.display = "block";
+    }, 500);
+  } else {
+    // hide topdownLogo
+    topdownLogo.style.display = "none";
+
+    // flip toggleImg
+    toggleImg.classList.add(flipClass);
+    setTimeout(() => {
+      toggleImg.classList.remove(flipClass);
+
+      // show toggleImg
+      toggleImg.classList.add(showClass);
+    }, 500);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     function onClick(event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-    raycaster.setFromCamera(mouse, camera);
+  raycaster.setFromCamera(mouse, camera);
 
-    const intersects = raycaster.intersectObjects(spheres);
+  const intersects = raycaster.intersectObjects(spheres);
 
-    if (intersects.length > 0) {
-      const clickedSphere = intersects[0].object;
-      const scale = clickedSphere.scale.x / 2;
+  if (intersects.length > 0) {
+    const clickedSphere = intersects[0].object;
+    const scale = clickedSphere.scale.x / 2;
 
-      const position = clickedSphere.position
-        .clone()
-        .add(clickedSphere.velocity.clone().multiplyScalar(1.5));
+    const position = clickedSphere.position
+      .clone()
+      .add(clickedSphere.velocity.clone().multiplyScalar(1.5));
 
-      if (scale >= 0.125) {
-        for (let i = 0; i < 3; i++) {
-          const newSphere = createSphere(
-            clickedSphere.material.color,
-            scale,
-            position
-          );
-          newSphere.velocity = clickedSphere.velocity
-            .clone()
-            .multiplyScalar(0.005);
-          newSphere.velocity.x +=
-            (Math.abs(Math.random() - 0.95) * 0.0002);
-          newSphere.velocity.y +=
-            (Math.abs(Math.random() - 0.95) * 0.0002);
-          newSphere.velocity.z +=
-            (Math.abs(Math.random() - 0.95) * 0.0002);
-          spheres.push(newSphere);
-          scene.add(newSphere);
-        }
-
-        scene.remove(clickedSphere);
-        const index = spheres.indexOf(clickedSphere);
-        spheres.splice(index, 1);
+    if (scale >= 0.125) {
+      for (let i = 0; i < 3; i++) {
+        const newSphere = createSphere(
+          clickedSphere.material.color,
+          scale,
+          position
+        );
+        newSphere.velocity = clickedSphere.velocity
+          .clone()
+          .multiplyScalar(0.005);
+        newSphere.velocity.x +=
+          Math.abs(Math.random() - 0.95) * 0.0002;
+        newSphere.velocity.y +=
+          Math.abs(Math.random() - 0.95) * 0.0002;
+        newSphere.velocity.z += Math.abs(Math.random() - 0.95) * 0.0002;
+        spheres.push(newSphere);
+        scene.add(newSphere);
       }
     }
+
+    scene.remove(clickedSphere);
+    spheres.splice(spheres.indexOf(clickedSphere), 1);
   }
+}
+
+
+
 
 
   function createSphere(color, scale, position) {
@@ -219,6 +336,7 @@
   sphere.position.add(direction);
   return sphere;
 }
+
 
 
   function animate() {
