@@ -198,10 +198,12 @@
   mouse = new THREE.Vector2();
 
   window.addEventListener("click", onClick, false);
+  window.addEventListener("touchend", onClick, false);
+
   const toggleImg = document.getElementById("toggleImg");
   const topdownLogo = document.querySelector(".logo");
   topdownLogo.addEventListener("click", toggleImage);
-
+  topdownLogo.addEventListener("touchend", toggleImage);
   toggleImg.addEventListener("click", function () {
     toggleImg.classList.add("flip");
     setTimeout(() => {
@@ -212,6 +214,17 @@
         topdownLogo.style.display === "none" ? "block" : "none";
     }, 500);
   });
+  
+  toggleImg.addEventListener("touchend", function () { // Add this block
+  toggleImg.classList.add("flip");
+  setTimeout(() => {
+    toggleImg.classList.remove("flip");
+    toggleImg.classList.toggle("show");
+    const topdownLogo = document.querySelector(".logo");
+    topdownLogo.style.display =
+      topdownLogo.style.display === "none" ? "block" : "none";
+  }, 500);
+});
 
   toggleImg.addEventListener("animationend", function () {
     toggleImg.classList.remove("flip");
