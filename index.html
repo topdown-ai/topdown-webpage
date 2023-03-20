@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Topdown - Coming Soon</title>
+    <link rel="shortcut icon" type ="image/svg+xml" href="./data/Topdown-Symbol-Only.svg">
     <style>
       body {
         margin: 0;
@@ -69,21 +70,6 @@
   backface-visibility: hidden;
 }
 
-#toggleImg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotateY(180deg);
-  width: 250px;
-  height: auto;
-  backface-visibility: hidden;
-  transition: transform 0.5s;
-}
-
-#toggleImg.show {
-  opacity: 1; /* Set opacity to 1 to show the image */
-  transform: translate(-50%, -50%) rotateY(0deg); /* Rotate the image around Y-axis by 180 degrees */
-}
 
 
 
@@ -121,12 +107,6 @@
 
     <img id="logo" src="https://i.imgur.com/OdOwV7x.png" alt="Topdown Logo" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotateY(0deg); width: 250px; height: auto; z-index: 1;" class="logo" onclick="toggleImage()" />
 
-
-
-    <img id="toggleImg" src="https://i.imgur.com/1183oCx.png" alt="toggle image" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotateY(180deg); width: 250px; height: auto; opacity: 0; transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;" class="flip show" />
-
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
       let scene,
@@ -149,14 +129,14 @@
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
-  const geometry = new THREE.SphereGeometry(1, 32, 32);
+  const geometry = new THREE.SphereGeometry(0.5, 32, 32);
   const material = new THREE.MeshPhongMaterial({
     color: 0x999999,
     shininess: 100,
   });
 
   const sphere1 = new THREE.Mesh(geometry, material);
-  sphere1.position.set(-1, 0, 0);
+  sphere1.position.set(-2, 0, 0);
   sphere1.velocity = new THREE.Vector3(
     (Math.random() - 0.5) * 0.0005,
     (Math.random() - 0.5) * 0.0005,
@@ -166,7 +146,7 @@
   scene.add(sphere1);
 
   const sphere2 = new THREE.Mesh(geometry, material);
-  sphere2.position.set(1, 0, 0);
+  sphere2.position.set(2, 0, 0);
   sphere2.velocity = new THREE.Vector3(
     (Math.random() - 0.5) * 0.0005,
     (Math.random() - 0.5) * 0.0005,
@@ -182,6 +162,10 @@
     (Math.random() - 0.5) * 0.0005,
     (Math.random() - 0.5) * 0.0005
   );
+  sphere1.addEventListener("click", onClick);
+  sphere2.addEventListener("click", onClick);
+  sphere3.addEventListener("click", onClick);
+
   spheres.push(sphere3);
   scene.add(sphere3);
 
@@ -200,88 +184,11 @@
   window.addEventListener("click", onClick, false);
   window.addEventListener("touchend", onClick, false);
 
-  const toggleImg = document.getElementById("toggleImg");
   const topdownLogo = document.querySelector(".logo");
-  topdownLogo.addEventListener("click", toggleImage);
-  topdownLogo.addEventListener("touchend", toggleImage);
-  toggleImg.addEventListener("click", function () {
-    toggleImg.classList.add("flip");
-    setTimeout(() => {
-      toggleImg.classList.remove("flip");
-      toggleImg.classList.toggle("show");
-      const topdownLogo = document.querySelector(".logo");
-      topdownLogo.style.display =
-        topdownLogo.style.display === "none" ? "block" : "none";
-    }, 500);
-  });
+
   
-  toggleImg.addEventListener("touchend", function () { // Add this block
-  toggleImg.classList.add("flip");
-  setTimeout(() => {
-    toggleImg.classList.remove("flip");
-    toggleImg.classList.toggle("show");
-    const topdownLogo = document.querySelector(".logo");
-    topdownLogo.style.display =
-      topdownLogo.style.display === "none" ? "block" : "none";
-  }, 500);
-});
-
-  toggleImg.addEventListener("animationend", function () {
-    toggleImg.classList.remove("flip");
-  });
-
 
   }
-function toggleImage() {
-  const toggleImg = document.getElementById("toggleImg");
-  const topdownLogo = document.querySelector(".logo");
-  const showClass = "show";
-  const flipClass = "flip";
-
-  // check if toggleImg is currently displayed
-  if (toggleImg.classList.contains(showClass)) {
-    // hide toggleImg
-    toggleImg.classList.remove(showClass);
-
-    // flip toggleImg
-    toggleImg.classList.add(flipClass);
-    setTimeout(() => {
-      toggleImg.classList.remove(flipClass);
-
-      // show topdownLogo
-      topdownLogo.style.display = "block";
-    }, 500);
-  } else {
-    // hide topdownLogo
-    topdownLogo.style.display = "none";
-
-    // flip toggleImg
-    toggleImg.classList.add(flipClass);
-    setTimeout(() => {
-      toggleImg.classList.remove(flipClass);
-
-      // show toggleImg
-      toggleImg.classList.add(showClass);
-    }, 500);
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
