@@ -28,12 +28,12 @@
     .team-container {
   display: flex;
   justify-content: center;
-  align-items: stretch; /* Change this from 'center' to 'stretch' */
+  align-items: stretch; 
 }
 
 
     .team-member {
-      margin: 0 2rem;
+      flex: 1;
     }
 
     .team-member img {
@@ -54,12 +54,7 @@
   margin-top: 0;
   margin-bottom: 0.5rem;
 }
-.fixed-width {
-  width: 220px; /* Adjust the value as needed */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+
 
 
   </style>
@@ -73,14 +68,14 @@
       <img src="data/anon.svg" alt="Drew">
       <h3>Drew</h3>
       <p>Founder | Business</p>
-      <p class = "fixed-width">Carnegie Mellon Engineer</p>
+      <p>Carnegie Mellon Engineer</p>
       <p>Yale MBA '24</p>
     </div>
     <div class="team-member">
       <img src="data/anon.svg" alt="Anon">
       <h3>Anon</h3>
       <p>Founder | Technology</p>
-      <p class = "fixed-width">Carnegie Mellon Engineer</p>
+      <p>Carnegie Mellon Engineer</p>
       <p>Staff Engineer, AI Products @ Unicorn</p>
     </div>
   </div>
