@@ -6,11 +6,11 @@
   <title>Example Page</title>
   <style>
     body {
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
     h1 {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       color: #333;
     }
 
@@ -18,16 +18,74 @@
       font-size: 1rem;
       color: #666;
     }
+
     .separator {
       border-top: 1px solid rgba(59, 141, 127, 1);
       margin-top: 1em;
       margin-bottom: 1em;
     }
+
+    .team-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch; /* Change this from 'center' to 'stretch' */
+}
+
+
+    .team-member {
+      margin: 0 2rem;
+    }
+
+    .team-member img {
+      display: block;
+      margin: 0 auto;
+      width: 2rem;
+      height: auto;
+    }
+
+    .team-member h3 {
+      text-align: center;
+      margin-top: 0.5rem;
+      margin-bottom: 0;
+    }
+
+    .team-member p {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+.fixed-width {
+  width: 220px; /* Adjust the value as needed */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
   </style>
 </head>
 <body>
   <h1>About</h1>
+  <h2>Team</h2>
   <div class="separator"></div>
-  <p>We are building tools that dramatically redefine and accelerate the software development process. Currently, we have purposefully limited information available about the product. If you are interested in learning more, please contact us and we'll be happy to share.</p>
+  <div class="team-container">
+    <div class="team-member">
+      <img src="data/anon.svg" alt="Drew">
+      <h3>Drew</h3>
+      <p>Founder | Business</p>
+      <p class = "fixed-width">Carnegie Mellon Engineer</p>
+      <p>Yale MBA '24</p>
+    </div>
+    <div class="team-member">
+      <img src="data/anon.svg" alt="Anon">
+      <h3>Anon</h3>
+      <p>Founder | Technology</p>
+      <p class = "fixed-width">Carnegie Mellon Engineer</p>
+      <p>Staff Engineer, AI Products @ Unicorn</p>
+    </div>
+  </div>
+  <h2>Mission</h2>
+  <div class="separator"></div>
+  <p>To dramatically redefine and accelerate the software development process. Currently, we have purposefully limited information available about the product. If you are interested in learning more, please contact us and we'll be happy to share more.</p>
 </body>
 </html>
