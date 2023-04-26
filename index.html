@@ -290,9 +290,21 @@ function hideMenu(event) {
   z-index: 2;
 }
 @media screen and (max-width: 767px) {
-  .menu {
-    width: 100%;
-  }
+ .menu {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%; /* fixed width */
+  height: auto; /* fit the text vertically */
+  padding: 2rem;
+  background-color: lightgrey;
+  border-radius: 10px;
+  /* box-shadow: 0 0 0 3px rgba(59, 141, 127, 1); */
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+  z-index: 2;
+}
 }
 
     .menu.show {
