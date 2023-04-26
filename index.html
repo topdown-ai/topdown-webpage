@@ -279,6 +279,7 @@ function hideMenu(event) {
   top: 80px;
   left: 50%;
   transform: translateX(-50%);
+  max-width: 85%;
   width: 25%; /* fixed width */
   height: auto; /* fit the text vertically */
   padding: 2rem;
@@ -289,23 +290,25 @@ function hideMenu(event) {
   transition: all 0.5s ease-in-out;
   z-index: 2;
 }
+
 @media screen and (max-width: 767px) {
- .menu {
-  position: absolute;
-  top: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 85%; /* fixed width */
-  height: auto; /* fit the text vertically */
-  padding: 2rem;
-  background-color: lightgrey;
-  border-radius: 10px !important;
-  /* box-shadow: 0 0 0 3px rgba(59, 141, 127, 1); */
-  opacity: 0;
-  transition: all 0.5s ease-in-out;
-  z-index: 2;
+  body .menu {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 75%;
+    height: auto; /* fit the text vertically */
+    padding: 2rem;
+    background-color: lightgrey;
+    border-radius: 10px;
+    /* box-shadow: 0 0 0 3px rgba(59, 141, 127, 1); */
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    z-index: 2;
+  }
 }
-}
+
 
     .menu.show {
       opacity: 0.95;
