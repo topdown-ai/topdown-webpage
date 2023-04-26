@@ -274,13 +274,14 @@ function hideMenu(event) {
     }
 
     /* menu styling */
+/* menu styling */
 .menu {
   position: absolute;
   top: 80px;
   left: 50%;
   transform: translateX(-50%);
   max-width: 85%;
-  width: 25%; /* fixed width */
+  width: auto; /* fixed width */
   height: auto; /* fit the text vertically */
   padding: 2rem;
   background-color: lightgrey;
@@ -289,7 +290,9 @@ function hideMenu(event) {
   opacity: 0;
   transition: all 0.5s ease-in-out;
   z-index: 2;
+  overflow-wrap: break-word;
 }
+
 
 @media screen and (max-width: 767px) {
   body .menu {
@@ -320,6 +323,9 @@ function hideMenu(event) {
       display: none;
     }
   </style>
+<footer style="position: absolute; bottom: 0; width: 100%; text-align: center; color: rgb(50,50,50);">&copy; 2023 Topdown. All rights reserved.</footer>
+
+
 </body>
 
 
