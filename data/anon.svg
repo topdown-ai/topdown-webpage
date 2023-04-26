@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="svg3437" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 549.9 604.32">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke-miterlimit: 120.62;
+        stroke-width: 61.82px;
+      }
+
+      .cls-1, .cls-2 {
+        fill: #3b8d7f;
+        stroke: #231f20;
+      }
+
+      .cls-2 {
+        stroke-miterlimit: 180.39;
+        stroke-width: 61.81px;
+      }
+    </style>
+  </defs>
+  <g id="layer1">
+    <g id="g3199">
+      <path id="path4693" class="cls-2" d="M518.99,573.41c0-134.78-109.26-244.04-244.04-244.04S30.91,438.63,30.91,573.41h488.08Z"/>
+      <path id="path4695" class="cls-1" d="M439.1,194.09c0,90.12-73.06,163.18-163.18,163.18S112.74,284.21,112.74,194.09,185.8,30.91,275.92,30.91s163.18,73.06,163.18,163.18h0Z"/>
+    </g>
+  </g>
+</svg>
