@@ -40,6 +40,7 @@
         justify-content: center;
         align-items: center;
         filter: blur(10px);
+        z-index:0;
       }
 
       #wrapper::before {
@@ -106,7 +107,7 @@
       justify-content: center;
       align-items: center;
       font-size: 1.2rem;
-      z-index: 1;
+      z-index: 2;
     }
     
     .navbar ul {
@@ -216,6 +217,7 @@
 
 
 function hideMenu(event) {
+  event.stopPropagation(); 
   const menu = document.getElementById("menu");
   const navbar = document.querySelector(".navbar");
   const clickedElement = event.target;
@@ -276,7 +278,7 @@ function hideMenu(event) {
     /* menu styling */
 /* menu styling */
 .menu {
-  position: absolute;
+  position: fixed;
   top: 80px;
   left: 50%;
   transform: translateX(-50%);
@@ -291,6 +293,7 @@ function hideMenu(event) {
   transition: all 0.5s ease-in-out;
   z-index: 2;
   overflow-wrap: break-word;
+  visibility: hidden;
 }
 
 
@@ -309,12 +312,14 @@ function hideMenu(event) {
     opacity: 0;
     transition: all 0.5s ease-in-out;
     z-index: 2;
+    visibility: hidden;
   }
 }
 
 
     .menu.show {
       opacity: 0.95;
+      visibility: visible;
       top: 130px;
     }
 
